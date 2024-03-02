@@ -43,17 +43,21 @@ def smtp_client(port=1025, mailserver='127.0.0.1'):
 
     # Send DATA command and handle server response.
     # Fill in start
-    dataCommand = 'DATA: test\r\n'
+    dataCommand = 'DATA\r\n'
     clientSocket.send(dataCommand.encode())
     recv4 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send message data.
     # Fill in start
+    dataMessage = 'Test.\r\n\r\n'
+    clientSocket.send(dataMessage.encode())
     # Fill in end
 
     # Message ends with a single period, send message end and handle server response.
     # Fill in start
+    clientSocket.send(endmsg.encode())
+    recv5 = clientSocket.recv(1024).decode()
     # Fill in end
 
     # Send QUIT command and handle server response.
